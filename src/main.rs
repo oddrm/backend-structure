@@ -1,4 +1,5 @@
 pub mod error;
+pub mod event_processor;
 pub mod storage;
 
 /// Main entry point.

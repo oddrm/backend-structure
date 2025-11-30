@@ -4,4 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+notify = "8.2.0"
 rocket = "0.5.1"
+tokio = "1.48.0"

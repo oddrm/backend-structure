@@ -43,3 +43,11 @@ impl StorageInstance {
         todo!()
     }
 }
+
+impl Iterator for StorageInstance {
+    type Item = Result<EntryID, StorageError>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        todo!()
+    }
+}

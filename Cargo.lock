@@ -774,6 +774,8 @@ dependencies = [
  "notify",
  "rocket",
  "tokio",
+ "tracing",
+ "tracing-subscriber",
 ]
 
 [[package]]

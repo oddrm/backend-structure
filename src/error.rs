@@ -1,3 +1,9 @@
+use rocket::serde::json::Json;
+use rocket::{
+    http::Status,
+    response::{self, Responder},
+};
+
 #[derive(Debug)]
 pub enum Error {
     StorageError(StorageError),
@@ -15,6 +21,12 @@ impl From<StorageError> for Error {
 impl From<notify::Error> for Error {
     fn from(err: notify::Error) -> Self {
         Error::PollingError(err)
+    }
+}
+
+impl<'r, 'o: 'r> Responder<'r, 'o> for Error {
+    fn respond_to(self, req: &'r rocket::Request<'_>) -> response::Result<'o> {
+        todo!()
     }
 }
 

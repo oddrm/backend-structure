@@ -1,5 +1,8 @@
 use crate::error;
+use rocket::serde::{Serialize, Deserialize};
 
+#[derive(Serialize, Deserialize)]
+#[serde(crate = "rocket::serde")]
 pub struct Metadata {}
 
 impl Metadata {

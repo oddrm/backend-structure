@@ -773,6 +773,8 @@ version = "0.1.0"
 dependencies = [
  "notify",
  "rocket",
+ "serde",
+ "serde_json",
  "tokio",
  "tracing",
  "tracing-subscriber",
@@ -895,6 +897,7 @@ dependencies = [
  "rocket_codegen",
  "rocket_http",
  "serde",
+ "serde_json",
  "state",
  "tempfile",
  "time",

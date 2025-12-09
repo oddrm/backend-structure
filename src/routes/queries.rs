@@ -1,0 +1,99 @@
+#![allow(unused_variables)]
+
+use crate::error::Error;
+use crate::storage::sequence::Sequence;
+use crate::storage::storage_instance::Map;
+use crate::{AppState, storage::sequence::SequenceID, storage::storage_instance::EntryID};
+use rocket::serde::{Deserialize, Serialize, json::Json};
+use rocket::{State, delete, get, post, put, response::status};
+
+#[derive(Serialize, Deserialize)]
+#[serde(crate = "rocket::serde")]
+pub struct Entry {
+    pub entry_id: EntryID,
+    pub name: String,
+    pub path: String,
+    pub platform: String,
+    pub size: u64,
+    pub tags: Vec<String>,
+}
+
+#[get("/entries?<search_string>&<sort_by>&<ascending>&<page>&<page_size>")]
+pub async fn get_entries(
+    state: &State<AppState>,
+    search_string: Option<String>,
+    sort_by: Option<String>,
+    ascending: Option<bool>,
+    page: Option<u32>,
+    page_size: Option<u32>,
+) -> Result<Json<Vec<Entry>>, Error> {
+    todo!()
+}
+
+#[get("/entries/<entry_id>/sequences")]
+pub async fn get_sequences(
+    state: &State<AppState>,
+    entry_id: EntryID,
+) -> Result<Json<Map<SequenceID, Sequence>>, Error> {
+    todo!()
+}
+
+#[post("/sequences/batch", format = "json", data = "<entry_ids>")]
+pub async fn batch_fetch_sequences(
+    state: &State<AppState>,
+    entry_ids: String,
+) -> Result<Json<Map<EntryID, Map<SequenceID, Sequence>>>, Error> {
+    todo!()
+}
+
+#[get("/entries/<entry_id>/metadata")]
+pub async fn get_metadata(
+    state: &State<AppState>,
+    entry_id: EntryID,
+) -> Result<Json<crate::storage::metadata::Metadata>, Error> {
+    todo!()
+}
+
+#[put("/entries/<entry_id>/metadata", format = "json", data = "<metadata>")]
+pub async fn update_metadata(
+    state: &State<AppState>,
+    entry_id: EntryID,
+    metadata: String,
+) -> Result<status::NoContent, Error> {
+    todo!()
+}
+
+#[put("/entries/<entry_id>/tags", format = "json", data = "<tags>")]
+pub async fn update_tags(
+    state: &State<AppState>,
+    entry_id: EntryID,
+    tags: String,
+) -> Result<status::NoContent, Error> {
+    todo!()
+}
+
+#[post("/entries/<entry_id>/sequences", format = "json", data = "<sequence>")]
+pub async fn add_sequence(
+    state: &State<AppState>,
+    entry_id: EntryID,
+    sequence: String,
+) -> Result<status::Created<Json<SequenceID>>, Error> {
+    todo!()
+}
+
+#[delete("/sequences/<sequence_id>")]
+pub async fn remove_sequence(
+    state: &State<AppState>,
+    sequence_id: SequenceID,
+) -> Result<status::NoContent, Error> {
+    todo!()
+}
+
+#[put("/sequences/<sequence_id>", format = "json", data = "<sequence>")]
+pub async fn update_sequence(
+    state: &State<AppState>,
+    sequence_id: SequenceID,
+    sequence: String,
+) -> Result<status::NoContent, Error> {
+    todo!()
+}

@@ -2,12 +2,16 @@ use std::{path::PathBuf, time::Duration};
 
 use crate::{
     error::{Error, StorageError},
-    storage::metadata::Metadata,
+    storage::{
+        metadata::Metadata,
+        sequence::{Sequence, SequenceID},
+    },
 };
 use tokio::sync::mpsc;
 use tokio::sync::oneshot;
 
 pub type EntryID = u64;
+pub type Map<K, V> = std::collections::HashMap<K, V>;
 
 pub struct StorageInstance {}
 
@@ -18,6 +22,7 @@ pub enum Event {
     UpdateMetadata(PathBuf, Metadata),
     GetMetadata(PathBuf, oneshot::Sender<Option<Metadata>>),
     GetPath(EntryID, oneshot::Sender<Option<PathBuf>>),
+    GetSequences(EntryID, oneshot::Sender<Map<SequenceID, Sequence>>),
     GetIterClone(oneshot::Sender<StorageInstance>),
 }
 
@@ -42,7 +47,7 @@ impl StorageInstance {
         todo!()
     }
 
-    pub fn insert_metadata_for_entry(
+    pub fn update_metadata_for_entry(
         &mut self,
         id: EntryID,
         metadata: &Metadata,
@@ -55,6 +60,10 @@ impl StorageInstance {
     }
 
     pub fn remove_entry(&mut self, id: EntryID) -> Result<(), StorageError> {
+        todo!()
+    }
+
+    pub fn get_sequences(&self, id: EntryID) -> Result<Map<SequenceID, Sequence>, StorageError> {
         todo!()
     }
 

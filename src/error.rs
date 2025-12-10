@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 use rocket::response::{self, Responder};
 
 #[derive(Debug)]

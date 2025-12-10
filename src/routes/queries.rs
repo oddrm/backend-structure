@@ -55,11 +55,20 @@ pub async fn update_metadata(
     todo!()
 }
 
-#[put("/entries/<entry_id>/tags", format = "json", data = "<tags>")]
-pub async fn update_tags(
+#[put("/entries/<entry_id>/tags", format = "json", data = "<tag>")]
+pub async fn add_tag(
     state: &State<AppState>,
     entry_id: EntryID,
-    tags: String,
+    tag: String,
+) -> Result<status::NoContent, Error> {
+    todo!()
+}
+
+#[delete("/entries/<entry_id>/tags", format = "json", data = "<tag>")]
+pub async fn remove_tag(
+    state: &State<AppState>,
+    entry_id: EntryID,
+    tag: String,
 ) -> Result<status::NoContent, Error> {
     todo!()
 }

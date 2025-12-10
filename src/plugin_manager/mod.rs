@@ -1,7 +1,7 @@
 pub mod manager;
 
 /*
-TODO
+TODO implement plugin manager
 the user/hooks trigger jobs
 every job:
 - has a set of parameters

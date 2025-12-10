@@ -79,7 +79,11 @@ impl StorageInstance {
         todo!()
     }
 
-    pub fn update_tags(&mut self, id: EntryID, tags: Vec<String>) -> Result<(), StorageError> {
+    pub fn add_tag(&mut self, id: EntryID, tag: String) -> Result<(), StorageError> {
+        todo!()
+    }
+
+    pub fn remove_tag(&mut self, id: EntryID, tag: String) -> Result<(), StorageError> {
         todo!()
     }
 

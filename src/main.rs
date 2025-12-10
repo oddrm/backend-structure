@@ -3,8 +3,8 @@ use std::time::Duration;
 use crate::storage::storage_instance::{Event, StorageInstance};
 use rocket::routes;
 use routes::queries::{
-    add_sequence, get_entries, get_metadata, get_sequences, remove_sequence, update_metadata,
-    update_sequence, update_tags,
+    add_sequence, add_tag, get_entries, get_metadata, get_sequences, remove_sequence, remove_tag,
+    update_metadata, update_sequence,
 };
 use std::path::PathBuf;
 use tokio::sync::mpsc::Sender;
@@ -44,10 +44,11 @@ async fn main() {
                 get_sequences,
                 get_metadata,
                 update_metadata,
-                update_tags,
                 add_sequence,
                 remove_sequence,
                 update_sequence,
+                add_tag,
+                remove_tag,
             ],
         )
         .manage(AppState { event_transmitter })

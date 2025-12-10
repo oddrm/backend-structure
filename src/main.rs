@@ -11,7 +11,7 @@ use tokio::sync::mpsc::Sender;
 use tracing_subscriber::FmtSubscriber;
 
 pub mod error;
-pub mod plugins;
+pub mod plugin_manager;
 pub mod routes;
 pub mod storage;
 

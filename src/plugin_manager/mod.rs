@@ -10,6 +10,8 @@ every job:
 - lock required for modification, read but not enumerate
 - has an own directory where it can store temporary files
 - yields transactions which get executed atomically
+- a transaction consists of a set of modifications to entries
+- modifications to files
 - if locked file gets modified while job is running, job gets aborted
 - communication over stdin/stdout
 ---
@@ -19,6 +21,8 @@ communication protocol:
     - temporary directory: PathBuf
 - job -> manager:
     - everything in queries
+    - file update: (targetPath: PathBuf, sourcePath: PathBuf)
+    - file insert: (targetPath: PathBuf, sourcePath: PathBuf)
     - request lock: Vec<EntryID>
         - blocking until lock acquired
     - release lock: Vec<EntryID>

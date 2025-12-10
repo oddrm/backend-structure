@@ -4,6 +4,7 @@ use std::{path::PathBuf, time::Duration};
 
 use crate::{
     error::{Error, StorageError},
+    routes::queries::Entry,
     storage::{
         metadata::Metadata,
         sequence::{Sequence, SequenceID},
@@ -42,31 +43,19 @@ impl StorageInstance {
         todo!()
     }
 
+    pub fn get_db_path(&self, id: EntryID) -> Result<Option<PathBuf>, StorageError> {
+        todo!()
+    }
+
     pub fn get_metadata(&self, id: EntryID) -> Result<Option<Metadata>, StorageError> {
         todo!()
     }
 
-    pub fn get_path(&self, id: EntryID) -> Result<Option<PathBuf>, StorageError> {
-        todo!()
-    }
-
-    pub fn update_metadata_for_entry(
+    pub fn update_metadata(
         &mut self,
         id: EntryID,
         metadata: &Metadata,
     ) -> Result<EntryID, StorageError> {
-        todo!()
-    }
-
-    pub fn add_path(&mut self, path: &PathBuf) -> Result<EntryID, StorageError> {
-        todo!()
-    }
-
-    pub fn remove_entry(&mut self, id: EntryID) -> Result<(), StorageError> {
-        todo!()
-    }
-
-    pub fn get_sequences(&self, id: EntryID) -> Result<Map<SequenceID, Sequence>, StorageError> {
         todo!()
     }
 
@@ -81,11 +70,15 @@ impl StorageInstance {
         todo!()
     }
 
-    pub fn add_tag(&mut self, id: EntryID, tag: String) -> Result<(), StorageError> {
+    pub fn get_entry(&self, id: EntryID) -> Result<Option<Entry>, StorageError> {
         todo!()
     }
 
-    pub fn remove_tag(&mut self, id: EntryID, tag: String) -> Result<(), StorageError> {
+    pub fn get_entry_by_path(&self, path: &str) -> Result<Option<Entry>, StorageError> {
+        todo!()
+    }
+
+    pub fn get_sequences(&self, id: EntryID) -> Result<Map<SequenceID, Sequence>, StorageError> {
         todo!()
     }
 
@@ -94,6 +87,14 @@ impl StorageInstance {
         entry_id: EntryID,
         sequence: Sequence,
     ) -> Result<SequenceID, StorageError> {
+        todo!()
+    }
+    pub fn update_sequence(
+        &mut self,
+        entry_id: EntryID,
+        sequence_id: SequenceID,
+        sequence: Sequence,
+    ) -> Result<(), StorageError> {
         todo!()
     }
 
@@ -105,12 +106,11 @@ impl StorageInstance {
         todo!()
     }
 
-    pub fn update_sequence(
-        &mut self,
-        entry_id: EntryID,
-        sequence_id: SequenceID,
-        sequence: Sequence,
-    ) -> Result<(), StorageError> {
+    pub fn add_tag(&mut self, id: EntryID, tag: String) -> Result<(), StorageError> {
+        todo!()
+    }
+
+    pub fn remove_tag(&mut self, id: EntryID, tag: String) -> Result<(), StorageError> {
         todo!()
     }
 

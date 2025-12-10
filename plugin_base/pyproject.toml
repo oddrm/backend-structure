@@ -2,16 +2,13 @@
 name = "plugin-base"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Daniel Meiborg",email = "mail@danielmeiborg.com"}
-]
+authors = []
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = [
-]
+dependencies = []
 
 [tool.poetry]
-packages = [{include = "plugin_base", from = "src"}]
+packages = [{ include = "plugin_base", from = "src" }]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

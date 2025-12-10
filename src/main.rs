@@ -2,19 +2,21 @@ use std::time::Duration;
 
 use crate::storage::storage_instance::{Event, StorageInstance};
 use rocket::routes;
+use routes::queries::{
+    add_sequence, get_entries, get_metadata, get_sequences, remove_sequence, update_metadata,
+    update_sequence, update_tags,
+};
 use std::path::PathBuf;
 use tokio::sync::mpsc::Sender;
 use tracing_subscriber::FmtSubscriber;
+
 pub mod error;
+pub mod plugins;
 pub mod routes;
 pub mod storage;
-use routes::queries::{
-    get_entries, get_sequences, batch_fetch_sequences, get_metadata,
-    update_metadata, update_tags, add_sequence, remove_sequence, update_sequence,
-};
 
 pub struct AppState {
-    event_transmitter: Sender<Event>,
+    pub event_transmitter: Sender<Event>,
 }
 
 /// Main entry point.
@@ -29,8 +31,7 @@ async fn main() {
     storage_instance
         .start_scanning(&Duration::from_secs(2))
         .unwrap();
-    // TODO: process events in thread
-    // storage_instance.process_events();
+    // TODO: process events in new thread
 
     let event_transmitter = storage_instance.get_event_transmitter();
 
@@ -41,7 +42,6 @@ async fn main() {
             routes![
                 get_entries,
                 get_sequences,
-                batch_fetch_sequences,
                 get_metadata,
                 update_metadata,
                 update_tags,

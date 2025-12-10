@@ -13,6 +13,7 @@ use tokio::sync::oneshot;
 pub type EntryID = u64;
 pub type Map<K, V> = std::collections::HashMap<K, V>;
 
+#[derive(Clone)]
 pub struct StorageInstance {}
 
 pub enum Event {
@@ -23,9 +24,9 @@ pub enum Event {
     GetMetadata(PathBuf, oneshot::Sender<Option<Metadata>>),
     GetPath(EntryID, oneshot::Sender<Option<PathBuf>>),
     GetSequences(EntryID, oneshot::Sender<Map<SequenceID, Sequence>>),
-    GetIterClone(oneshot::Sender<StorageInstance>),
+    GetIterClone(oneshot::Sender<Iter>),
 }
-
+// TODO think about importing yaml metadata files
 impl StorageInstance {
     pub fn new(path: &PathBuf) -> Result<Self, StorageError> {
         todo!()
@@ -67,6 +68,46 @@ impl StorageInstance {
         todo!()
     }
 
+    pub fn get_entries(
+        &self,
+        search_string: Option<String>,
+        sort_by: Option<String>,
+        ascending: Option<bool>,
+        page: Option<u32>,
+        page_size: Option<u32>,
+    ) -> Result<Vec<(EntryID, Metadata)>, StorageError> {
+        todo!()
+    }
+
+    pub fn update_tags(&mut self, id: EntryID, tags: Vec<String>) -> Result<(), StorageError> {
+        todo!()
+    }
+
+    pub fn add_sequence(
+        &mut self,
+        entry_id: EntryID,
+        sequence: Sequence,
+    ) -> Result<SequenceID, StorageError> {
+        todo!()
+    }
+
+    pub fn remove_sequence(
+        &mut self,
+        entry_id: EntryID,
+        sequence_id: SequenceID,
+    ) -> Result<(), StorageError> {
+        todo!()
+    }
+
+    pub fn update_sequence(
+        &mut self,
+        entry_id: EntryID,
+        sequence_id: SequenceID,
+        sequence: Sequence,
+    ) -> Result<(), StorageError> {
+        todo!()
+    }
+
     pub fn process_event(&mut self, event: &Event) -> Result<(), StorageError> {
         todo!()
     }
@@ -91,10 +132,17 @@ impl StorageInstance {
     pub fn get_event_transmitter(&self) -> mpsc::Sender<Event> {
         todo!()
     }
+
+    pub fn iter(&self) -> Iter {
+        todo!()
+    }
 }
 
-impl Iterator for StorageInstance {
-    type Item = Result<EntryID, StorageError>;
+#[derive(Clone)]
+pub struct Iter {}
+
+impl Iterator for Iter {
+    type Item = EntryID;
 
     fn next(&mut self) -> Option<Self::Item> {
         todo!()

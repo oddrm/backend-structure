@@ -38,14 +38,6 @@ pub async fn get_sequences(
     todo!()
 }
 
-#[post("/sequences/batch", format = "json", data = "<entry_ids>")]
-pub async fn batch_fetch_sequences(
-    state: &State<AppState>,
-    entry_ids: String,
-) -> Result<Json<Map<EntryID, Map<SequenceID, Sequence>>>, Error> {
-    todo!()
-}
-
 #[get("/entries/<entry_id>/metadata")]
 pub async fn get_metadata(
     state: &State<AppState>,
@@ -81,17 +73,23 @@ pub async fn add_sequence(
     todo!()
 }
 
-#[delete("/sequences/<sequence_id>")]
+#[delete("/entries/<entry_id>/sequences/<sequence_id>")]
 pub async fn remove_sequence(
     state: &State<AppState>,
+    entry_id: EntryID,
     sequence_id: SequenceID,
 ) -> Result<status::NoContent, Error> {
     todo!()
 }
 
-#[put("/sequences/<sequence_id>", format = "json", data = "<sequence>")]
+#[put(
+    "/entries/<entry_id>/sequences/<sequence_id>",
+    format = "json",
+    data = "<sequence>"
+)]
 pub async fn update_sequence(
     state: &State<AppState>,
+    entry_id: EntryID,
     sequence_id: SequenceID,
     sequence: String,
 ) -> Result<status::NoContent, Error> {

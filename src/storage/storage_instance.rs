@@ -30,6 +30,11 @@ pub enum Event {
     GetIterClone(oneshot::Sender<Iter>),
 }
 // TODO think about importing yaml metadata files
+// TODO parallel read access, use multiversion concurrency control, as much as possible sled inbuilt functionality
+// TODO make reads and writes always transactional
+// TODO rename to records?
+// find name for non-file data
+// TODO differentiate between file and non-file read/write
 impl StorageInstance {
     pub fn new(path: &PathBuf) -> Result<Self, StorageError> {
         todo!()
@@ -52,7 +57,7 @@ impl StorageInstance {
     }
 
     pub fn update_metadata(
-        &mut self,
+        &self,
         id: EntryID,
         metadata: &Metadata,
     ) -> Result<EntryID, StorageError> {
@@ -83,14 +88,14 @@ impl StorageInstance {
     }
 
     pub fn add_sequence(
-        &mut self,
+        &self,
         entry_id: EntryID,
         sequence: Sequence,
     ) -> Result<SequenceID, StorageError> {
         todo!()
     }
     pub fn update_sequence(
-        &mut self,
+        &self,
         entry_id: EntryID,
         sequence_id: SequenceID,
         sequence: Sequence,
@@ -99,18 +104,18 @@ impl StorageInstance {
     }
 
     pub fn remove_sequence(
-        &mut self,
+        &self,
         entry_id: EntryID,
         sequence_id: SequenceID,
     ) -> Result<(), StorageError> {
         todo!()
     }
 
-    pub fn add_tag(&mut self, id: EntryID, tag: String) -> Result<(), StorageError> {
+    pub fn add_tag(&self, id: EntryID, tag: String) -> Result<(), StorageError> {
         todo!()
     }
 
-    pub fn remove_tag(&mut self, id: EntryID, tag: String) -> Result<(), StorageError> {
+    pub fn remove_tag(&self, id: EntryID, tag: String) -> Result<(), StorageError> {
         todo!()
     }
 
@@ -126,7 +131,7 @@ impl StorageInstance {
         todo!()
     }
 
-    // only sends events into queue, events still have to be processed somewhere else
+    // only sends fs events into queue, events still have to be processed somewhere else
     pub fn start_scanning(&mut self, interval: &Duration) -> Result<(), Error> {
         todo!()
     }

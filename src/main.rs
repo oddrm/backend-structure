@@ -31,7 +31,7 @@ async fn main() {
     storage_instance
         .start_scanning(&Duration::from_secs(2))
         .unwrap();
-    // TODO: process events in new thread
+    // TODO: process events
 
     let event_transmitter = storage_instance.get_event_transmitter();
 

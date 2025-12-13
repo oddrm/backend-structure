@@ -1,22 +1,12 @@
 #![allow(unused_variables)]
 
 use crate::error::Error;
+use crate::storage::entry::Entry;
 use crate::storage::sequence::Sequence;
 use crate::storage::storage_instance::Map;
 use crate::{AppState, storage::sequence::SequenceID, storage::storage_instance::EntryID};
-use rocket::serde::{Deserialize, Serialize, json::Json};
+use rocket::serde::json::Json;
 use rocket::{State, delete, get, post, put, response::status};
-
-#[derive(Serialize, Deserialize)]
-#[serde(crate = "rocket::serde")]
-pub struct Entry {
-    pub entry_id: EntryID,
-    pub name: String,
-    pub path: String,
-    pub platform: String,
-    pub size: u64,
-    pub tags: Vec<String>,
-}
 
 #[get("/entries/<entry_id>/metadata")]
 pub async fn get_metadata(

@@ -14,7 +14,6 @@ pub mod error;
 pub mod plugin_manager;
 pub mod routes;
 pub mod storage;
-
 pub struct AppState {
     pub event_transmitter: Sender<Event>,
 }
@@ -26,13 +25,14 @@ async fn main() {
     // logging
     let log_subscriber = FmtSubscriber::new();
     tracing::subscriber::set_global_default(log_subscriber).unwrap();
+    // tracing::info!("Logging initialized.");
     // db
     let mut storage_instance = StorageInstance::new(&PathBuf::from("storage_path")).unwrap();
     storage_instance
         .start_scanning(&Duration::from_secs(2))
         .unwrap();
     // TODO: process events
-
+    storage_instance.process_events().await.unwrap();
     let event_transmitter = storage_instance.get_event_transmitter();
 
     // web server

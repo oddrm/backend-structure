@@ -4,7 +4,7 @@ use std::{path::PathBuf, time::Duration};
 
 use crate::{
     error::{Error, StorageError},
-    routes::queries::Entry,
+    storage::entry::Entry,
     storage::{
         metadata::Metadata,
         sequence::{Sequence, SequenceID},
@@ -15,6 +15,7 @@ use tokio::sync::oneshot;
 
 pub type EntryID = u64;
 pub type Map<K, V> = std::collections::HashMap<K, V>;
+pub type TxID = u64;
 
 #[derive(Clone)]
 pub struct StorageInstance {}
@@ -35,6 +36,7 @@ pub enum Event {
 // TODO rename to records?
 // find name for non-file data
 // TODO differentiate between file and non-file read/write
+// TODO system scan for file integrity
 impl StorageInstance {
     pub fn new(path: &PathBuf) -> Result<Self, StorageError> {
         todo!()
@@ -48,78 +50,102 @@ impl StorageInstance {
         todo!()
     }
 
-    pub fn get_db_path(&self, id: EntryID) -> Result<Option<PathBuf>, StorageError> {
+    pub fn get_db_path(&self, id: EntryID, txid: TxID) -> Result<Option<PathBuf>, StorageError> {
         todo!()
     }
 
-    pub fn get_metadata(&self, id: EntryID) -> Result<Option<Metadata>, StorageError> {
+    pub async fn get_metadata(
+        &self,
+        id: EntryID,
+        txid: TxID,
+    ) -> Result<Option<Metadata>, StorageError> {
         todo!()
     }
 
-    pub fn update_metadata(
+    pub async fn update_metadata(
         &self,
         id: EntryID,
         metadata: &Metadata,
+        txid: TxID,
     ) -> Result<EntryID, StorageError> {
         todo!()
     }
 
-    pub fn get_entries(
+    pub async fn get_entries(
         &self,
         search_string: Option<String>,
         sort_by: Option<String>,
         ascending: Option<bool>,
         page: Option<u32>,
         page_size: Option<u32>,
+        txid: TxID,
     ) -> Result<Vec<(EntryID, Metadata)>, StorageError> {
         todo!()
     }
 
-    pub fn get_entry(&self, id: EntryID) -> Result<Option<Entry>, StorageError> {
+    pub async fn get_entry(&self, id: EntryID, txid: TxID) -> Result<Option<Entry>, StorageError> {
         todo!()
     }
 
-    pub fn get_entry_by_path(&self, path: &str) -> Result<Option<Entry>, StorageError> {
+    pub async fn get_entry_by_path(
+        &self,
+        path: &str,
+        txid: TxID,
+    ) -> Result<Option<Entry>, StorageError> {
         todo!()
     }
 
-    pub fn get_sequences(&self, id: EntryID) -> Result<Map<SequenceID, Sequence>, StorageError> {
+    pub async fn get_sequences(
+        &self,
+        id: EntryID,
+        txid: TxID,
+    ) -> Result<Map<SequenceID, Sequence>, StorageError> {
         todo!()
     }
 
-    pub fn add_sequence(
+    pub async fn add_sequence(
         &self,
         entry_id: EntryID,
         sequence: Sequence,
+        txid: TxID,
     ) -> Result<SequenceID, StorageError> {
         todo!()
     }
-    pub fn update_sequence(
+    pub async fn update_sequence(
         &self,
         entry_id: EntryID,
         sequence_id: SequenceID,
         sequence: Sequence,
+        txid: TxID,
     ) -> Result<(), StorageError> {
         todo!()
     }
 
-    pub fn remove_sequence(
+    pub async fn remove_sequence(
         &self,
         entry_id: EntryID,
         sequence_id: SequenceID,
+        txid: TxID,
     ) -> Result<(), StorageError> {
         todo!()
     }
 
-    pub fn add_tag(&self, id: EntryID, tag: String) -> Result<(), StorageError> {
+    pub async fn add_tag(&self, id: EntryID, tag: String, txid: TxID) -> Result<(), StorageError> {
         todo!()
     }
 
-    pub fn remove_tag(&self, id: EntryID, tag: String) -> Result<(), StorageError> {
+    pub async fn remove_tag(
+        &self,
+        id: EntryID,
+        tag: String,
+        txid: TxID,
+    ) -> Result<(), StorageError> {
         todo!()
     }
 
-    pub fn process_event(&mut self, event: &Event) -> Result<(), StorageError> {
+    pub fn get_transaction_id(&self) {}
+
+    pub async fn process_event(&mut self, event: &Event) -> Result<(), StorageError> {
         todo!()
     }
 
@@ -127,7 +153,7 @@ impl StorageInstance {
         todo!()
     }
 
-    pub fn scan_once(&mut self) -> Result<(), Error> {
+    pub async fn scan_once(&mut self) -> Result<(), Error> {
         todo!()
     }
 

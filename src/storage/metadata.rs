@@ -1,6 +1,6 @@
 #![allow(unused)]
 
-use crate::error;
+use crate::error::Error;
 use rocket::serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
@@ -8,11 +8,12 @@ use rocket::serde::{Deserialize, Serialize};
 pub struct Metadata {}
 
 impl Metadata {
-    pub fn from_string(data: &String) -> Result<Self, error::Error> {
+    // includes validation
+    pub fn from_yaml(yaml_str: &str) -> Result<Self, Error> {
         todo!()
     }
 
-    pub fn to_string(&self) -> &String {
+    pub fn to_yaml(&self) -> Result<String, Error> {
         todo!()
     }
 }

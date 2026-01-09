@@ -16,6 +16,7 @@ use tokio::sync::oneshot;
 pub type EntryID = u64;
 pub type Map<K, V> = std::collections::HashMap<K, V>;
 pub type TxID = u64;
+pub type Tag = String;
 
 #[derive(Clone)]
 pub struct StorageInstance {}
@@ -130,20 +131,17 @@ impl StorageInstance {
         todo!()
     }
 
-    pub async fn add_tag(&self, id: EntryID, tag: String, txid: TxID) -> Result<(), StorageError> {
+    pub async fn add_tag(&self, id: EntryID, tag: Tag, txid: TxID) -> Result<(), StorageError> {
         todo!()
     }
 
-    pub async fn remove_tag(
-        &self,
-        id: EntryID,
-        tag: String,
-        txid: TxID,
-    ) -> Result<(), StorageError> {
+    pub async fn remove_tag(&self, id: EntryID, tag: Tag, txid: TxID) -> Result<(), StorageError> {
         todo!()
     }
 
-    pub fn get_transaction_id(&self) {}
+    pub fn get_transaction_id(&self) -> TxID {
+        todo!()
+    }
 
     pub async fn process_event(&mut self, event: &Event) -> Result<(), StorageError> {
         todo!()
@@ -157,7 +155,7 @@ impl StorageInstance {
         todo!()
     }
 
-    // only sends fs events into queue, events still have to be processed somewhere else
+    // only starts sending fs events into queue, events still have to be processed somewhere else
     pub fn start_scanning(&mut self, interval: &Duration) -> Result<(), Error> {
         todo!()
     }

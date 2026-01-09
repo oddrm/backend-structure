@@ -1,4 +1,5 @@
 pub mod manager;
+pub mod plugin;
 
 /*
 TODO implement plugin manager

@@ -11,6 +11,7 @@ impl Sequence {
 
     pub fn description(&self) -> &String {
         todo!()
+        
     }
 
     pub fn start(&self) -> Timestamp {
